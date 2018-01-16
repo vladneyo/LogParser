@@ -1,0 +1,12 @@
+*.suo
+packages/
+*.user
+LogParser.API/obj/
+LogParser.API/bin/
+LogParser.CLI/bin/Debug/LogParser.CLI.exe.config
+LogParser.CLI/bin/
+LogParser.CLI/obj/
+LogParser.EDM/obj/
+LogParser.EDM/bin/
+LogParser.Data/obj/
+LogParser.Data/bin/

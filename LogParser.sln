@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.CLI", "LogParser.CLI\LogParser.CLI.csproj", "{0B76DD15-2431-4572-9E56-14BD6540A25F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.API", "LogParser.API\LogParser.API.csproj", "{0C0D096F-73EB-4B62-8323-5D3D79A0E825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.EDM", "LogParser.EDM\LogParser.EDM.csproj", "{590FFF35-966E-4A36-BED9-BDB974D6F7C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Data", "LogParser.Data\LogParser.Data.csproj", "{61A756ED-3762-46CC-9264-501F1B31474C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B76DD15-2431-4572-9E56-14BD6540A25F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B76DD15-2431-4572-9E56-14BD6540A25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B76DD15-2431-4572-9E56-14BD6540A25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B76DD15-2431-4572-9E56-14BD6540A25F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C0D096F-73EB-4B62-8323-5D3D79A0E825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C0D096F-73EB-4B62-8323-5D3D79A0E825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C0D096F-73EB-4B62-8323-5D3D79A0E825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C0D096F-73EB-4B62-8323-5D3D79A0E825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590FFF35-966E-4A36-BED9-BDB974D6F7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590FFF35-966E-4A36-BED9-BDB974D6F7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590FFF35-966E-4A36-BED9-BDB974D6F7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590FFF35-966E-4A36-BED9-BDB974D6F7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A756ED-3762-46CC-9264-501F1B31474C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A756ED-3762-46CC-9264-501F1B31474C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A756ED-3762-46CC-9264-501F1B31474C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A756ED-3762-46CC-9264-501F1B31474C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
