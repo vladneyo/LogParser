@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogParser.CLI.CommandHandlers;
 
 namespace LogParser.CLI.Commands
 {
     public abstract class ConsoleCommand
     {
         protected ConsoleCommand Successor { get; private set; }
+        public IHandler Handler { get; protected set; }
 
         public void SetSuccessor(ConsoleCommand successor)
         {

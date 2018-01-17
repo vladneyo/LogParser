@@ -43,10 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\HelpCommandHandler.cs" />
+    <Compile Include="CommandHandlers\IHandler.cs" />
+    <Compile Include="CommandHandlers\ParseCommandHandler.cs" />
     <Compile Include="Commands\CommandInvoker.cs" />
     <Compile Include="Commands\ConsoleCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
-    <Compile Include="Commands\ParserCommand.cs" />
+    <Compile Include="Commands\ParseCommand.cs" />
     <Compile Include="Constants\ConsoleFlags.cs" />
     <Compile Include="Constants\LogTypeConstants.cs" />
     <Compile Include="Program.cs" />
@@ -56,7 +59,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CommandHandlers\" />
+    <ProjectReference Include="..\LogParser.Parser\LogParser.Parser.csproj">
+      <Project>{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}</Project>
+      <Name>LogParser.Parser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

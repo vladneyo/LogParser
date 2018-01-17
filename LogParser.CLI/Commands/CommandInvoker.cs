@@ -13,7 +13,7 @@ namespace LogParser.CLI.Commands
         {
             //build handler chaing
             _start = new HelpCommand();
-            _start.SetSuccessor(new ParserCommand());
+            _start.SetSuccessor(new ParseCommand());
         }
 
         public async Task Invoke(string command, string param)
