@@ -10,3 +10,5 @@ LogParser.EDM/obj/
 LogParser.Data/bin/
 LogParser.Data/obj/
 .vs/
+LogParser.Parser/obj/
+LogParser.Parser/bin/

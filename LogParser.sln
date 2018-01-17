@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.EDM", "LogParser.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Data", "LogParser.Data\LogParser.Data.csproj", "{61A756ED-3762-46CC-9264-501F1B31474C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Parser", "LogParser.Parser\LogParser.Parser.csproj", "{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{61A756ED-3762-46CC-9264-501F1B31474C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A756ED-3762-46CC-9264-501F1B31474C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A756ED-3762-46CC-9264-501F1B31474C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
