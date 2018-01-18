@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using LogParser.CLI.CommandHandlers;
-using LogParser.CLI.Constants;
+using LogParser.CLI.Commands;
+using LogParser.Data.Constants;
 
-namespace LogParser.CLI.Commands
+namespace LogParser.Data.Commands
 {
     public class ParseCommand: ConsoleCommand
     {

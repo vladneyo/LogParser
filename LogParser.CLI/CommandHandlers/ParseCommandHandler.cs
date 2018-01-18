@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LogParser.CLI.Constants;
+using LogParser.Data.Constants;
 using LogParser.Parser;
 
 namespace LogParser.CLI.CommandHandlers
 {
     public class ParseCommandHandler: IHandler
     {
-        private Parser.LogParser _parser;
+        private ParserModule _parser;
 
         public ParseCommandHandler()
         {
-            _parser = new Parser.LogParser();
+            _parser = new Parser.ParserModule();
         }
-        public void Handle(params object[] args)
+        public async void Handle(params object[] args)
         {
             string mode = (string) args[0];
             string filePath = (string) args[1];
@@ -31,7 +27,7 @@ namespace LogParser.CLI.CommandHandlers
             {
                 throw new FileNotFoundException();
             }
-            _parser.Parse(mode, filePath);
+            await _parser.ParseAsync(mode, File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read));
         }
     }
 }

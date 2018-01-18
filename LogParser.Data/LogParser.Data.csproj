@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ConsoleFlags.cs" />
+    <Compile Include="Constants\LogTypeConstants.cs" />
+    <Compile Include="Dtos\AccessLogDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

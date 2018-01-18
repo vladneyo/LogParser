@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LogParser.CLI.CommandHandlers;
-using LogParser.CLI.Constants;
+﻿using LogParser.CLI.CommandHandlers;
+using LogParser.Data.Constants;
 
 namespace LogParser.CLI.Commands
 {
