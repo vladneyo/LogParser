@@ -1,15 +1,14 @@
 ﻿using System;
 using LogParser.CLI.CommandHandlers;
-using LogParser.CLI.Commands;
 using LogParser.Data.Constants;
 
-namespace LogParser.Data.Commands
+namespace LogParser.CLI.Commands
 {
     public class ParseCommand: ConsoleCommand
     {
         public ParseCommand()
         {
-            this.Handler = new ParseCommandHandler();
+            Handler = new ParseCommandHandler();
         }
         public override void Process(string command, string param)
         {

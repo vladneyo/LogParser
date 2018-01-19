@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using LogParser.Data.Commands;
 
 namespace LogParser.CLI.Commands
 {

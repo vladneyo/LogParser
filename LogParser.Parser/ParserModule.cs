@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using LogParser.Data.Constants;
-using LogParser.Data.Dtos;
-using LogParser.Parser.Parsers;
 using LogParser.Parser.Strategies;
 using LParser = LogParser.Parser.Parsers.LogParser;
 
@@ -15,72 +12,89 @@ namespace LogParser.Parser
     public class ParserModule
     {
         private readonly int _bufferSize = 20*1024; // 20 Kb buffer
-        private readonly List<Task> _parsingTasks = new List<Task>();
+
         private readonly Dictionary<string, IParseStrategy> _strategies = new Dictionary<string, IParseStrategy>();
+
+        private readonly int _maxPacketCapacity = 50; // capacity of List will be parsed and send to API
+
+        private SpinLock _parsingLock = new SpinLock();
+
+        private Action<string[], LParser> _parsing = null;
+
+        private Func<List<Dictionary<string,string>>, Task> _sendToApi = null;
 
         public ParserModule()
         {
-            this._strategies.Add(LogTypeConstants.Access.Arg, new AccessLogStrategy());
+            _strategies.Add(LogTypeConstants.Access.Arg, new AccessLogStrategy());
+            _parsing = ParsingHandler;
+            _sendToApi = SendingHandler;
         }
 
-        public async Task<object> ParseAsync(string mode, FileStream fs)
+        public async Task ParseAsync(string mode, FileStream fs)
         {
-            // stage 1: read file
-            List<string> lines = ReadFile(fs);
-
-            // stage 2: parse file
-            ParserPool<LParser> pool = SetupPool(mode);
-
-            #region FookingShit
-            // initialize result set
-            var resultSet = new ConcurrentBag<AccessLogDto>();
-
-            foreach (var line in lines)
+            //System.Diagnostics.Debugger.Launch();
+            var parser = new LParser(_strategies[mode]);
+            // run 1st task for reading file by chunks
+            var reading = Task.Run(() =>
             {
-                _parsingTasks.Add(new Task(() =>
+                string[] lines = new string[_maxPacketCapacity];
+                using (BufferedStream bs = new BufferedStream(fs, _bufferSize))
+                using (StreamReader sr = new StreamReader(bs))
                 {
-                    // get parser from pool
-                    var parser = pool.GetObject();
-                    // put result of parsing to concurrent collection
-                    resultSet.Add((AccessLogDto)parser.Parse(line));
-                }));
-            }
-            #endregion
+                    int runNumbers = 0;
+                    IAsyncResult parserResult = null;
+                    int count = 0;
+                    while (!sr.EndOfStream)
+                    {
+                        if (count >= _maxPacketCapacity)
+                        {
+                            if (runNumbers >= 2)
+                            {
+                                // if new chunk is already read we need to wait until previous chuck is parsed
+                                _parsing.EndInvoke(parserResult);
+                                runNumbers = 0;
+                            }
+                            // trigger parser to parse part of lines
+                            parserResult = _parsing.BeginInvoke(lines, parser, null, null);
+                            runNumbers++;
+                            count = 0;
+                        }
 
-            // wait unit all parsers end
-            await Task.WhenAll(_parsingTasks);
-
-            // stage 3: sort collection with dtos
-            var result = resultSet.OrderBy(x => x.Time).ToList();
-
-            // return collection
-            return Task.FromResult(result);
+                        lines[count] = sr.ReadLine();
+                        count++;
+                    }
+                }
+            });
+            reading.Wait();
         }
 
-        private ParserPool<LParser> SetupPool(string mode)
+        private async void ParsingHandler(string[] lines, LParser parser)
         {
-            // setup parsers pool
-            ParserPool<LParser> pool = new ParserPool<LParser>();
-            // configure parser with needed strategy
-            for (int i = 0; i < Environment.ProcessorCount; i++)
+            bool lockTaken = false;
+            try
             {
-                pool.PutObject(new LParser(_strategies[mode]));
-            }
-            return pool;
-        }
-
-        private List<string> ReadFile(FileStream fs)
-        {
-            List<string> lines = new List<string>();
-            using (BufferedStream bs = new BufferedStream(fs, _bufferSize))
-            using (StreamReader sr = new StreamReader(bs))
-            {
-                while (!sr.EndOfStream)
+                _parsingLock.Enter(ref lockTaken);
+                var objects = new List<Dictionary<string, string>>(lines.Length);
+                foreach (var line in lines)
                 {
-                    lines.Add(sr.ReadLine());
+                    objects.Add(parser.Parse(line));
+                }
+                var result = _sendToApi.BeginInvoke(objects, null, null);
+                await _sendToApi.EndInvoke(result);
+            }
+            finally
+            {
+                if (lockTaken)
+                {
+                    _parsingLock.Exit();
                 }
             }
-            return lines;
+
+        }
+
+        private async Task SendingHandler(List<Dictionary<string, string>> objects)
+        {
+            // send request
         }
     }
 }

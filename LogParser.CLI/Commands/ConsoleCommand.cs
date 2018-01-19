@@ -10,7 +10,7 @@ namespace LogParser.CLI.Commands
 
         public void SetSuccessor(ConsoleCommand successor)
         {
-            this.Successor = successor;
+            Successor = successor;
         }
 
         public abstract void Process(string command, string param);

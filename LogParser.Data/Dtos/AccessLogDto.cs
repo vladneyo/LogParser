@@ -6,7 +6,7 @@ namespace LogParser.Data.Dtos
     {
         public int Id { get; set; }
 
-        public string IP { get; set; }
+        public string Host { get; set; }
 
         public DateTime Time { get; set; }
 

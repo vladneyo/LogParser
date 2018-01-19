@@ -7,7 +7,7 @@ namespace LogParser.CLI.Commands
     {
         public HelpCommand()
         {
-            this.Handler = new HelpCommandHandler();
+            Handler = new HelpCommandHandler();
         }
         public override void Process(string command, string param)
         {

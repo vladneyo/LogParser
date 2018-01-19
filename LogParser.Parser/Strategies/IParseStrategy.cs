@@ -1,7 +1,9 @@
-﻿namespace LogParser.Parser.Strategies
+﻿using System.Collections.Generic;
+
+namespace LogParser.Parser.Strategies
 {
     public interface IParseStrategy
     {
-        object Parse(string input);
+        Dictionary<string, string> Parse(string input);
     }
 }

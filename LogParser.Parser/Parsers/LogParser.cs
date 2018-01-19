@@ -1,4 +1,5 @@
-﻿using LogParser.Parser.Strategies;
+﻿using System.Collections.Generic;
+using LogParser.Parser.Strategies;
 
 namespace LogParser.Parser.Parsers
 {
@@ -10,7 +11,7 @@ namespace LogParser.Parser.Parsers
             _strategy = strategy;
         }
 
-        public object Parse(string input)
+        public Dictionary<string, string> Parse(string input)
         {
             return _strategy.Parse(input);
         }

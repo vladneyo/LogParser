@@ -11,14 +11,13 @@ namespace LogParser.CLI.CommandHandlers
 
         public ParseCommandHandler()
         {
-            _parser = new Parser.ParserModule();
+            _parser = new ParserModule();
         }
         public async void Handle(params object[] args)
         {
             string mode = (string) args[0];
             string filePath = (string) args[1];
             Console.WriteLine("PARSER");
-            Console.WriteLine($"{mode} {filePath}");
             if (mode == LogTypeConstants.Error.Arg)
             {
                 throw new NotImplementedException();
