@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
+using LogParser.CLI.Constants;
 using LogParser.Data.Constants;
 using LogParser.Parser;
 
@@ -11,13 +13,12 @@ namespace LogParser.CLI.CommandHandlers
 
         public ParseCommandHandler()
         {
-            _parser = new ParserModule();
+            _parser = new ParserModule(ConfigurationManager.AppSettings[AppSettingsConstants.ApiEndpoint]);
         }
         public async void Handle(params object[] args)
         {
             string mode = (string) args[0];
             string filePath = (string) args[1];
-            Console.WriteLine("PARSER");
             if (mode == LogTypeConstants.Error.Arg)
             {
                 throw new NotImplementedException();
