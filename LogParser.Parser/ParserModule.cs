@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
-using LogParser.Parser.Helpers;
 using LParser = LogParser.Parser.Parsers.LogParser;
 
 namespace LogParser.Parser
@@ -12,9 +9,7 @@ namespace LogParser.Parser
     {
         public async Task ParseAsync(string mode, FileStream fs)
         {
-            //System.Diagnostics.Debugger.Launch();
             var parser = new LParser(_strategies[mode].Value);
-            var apiData = SetupApiData(mode);
 
             // run 1st task for reading file by chunks
             var reading = Task.Run(() =>
@@ -37,7 +32,7 @@ namespace LogParser.Parser
                                 runNumbers = 0;
                             }
                             // trigger parser to parse part of lines
-                            parserResult = ParsingHandler(lines, parser, apiData);
+                            parserResult = ParsingHandler(lines, parser);
                             runNumbers++;
                             count = 0;
                         }
@@ -50,44 +45,14 @@ namespace LogParser.Parser
             reading.Wait();
         }
 
-        private async Task ParsingHandler(string[] lines, LParser parser, ApiData apiData)
+        private async Task ParsingHandler(string[] lines, LParser parser)
         {
-            try
+            var parsedObjects = new List<Dictionary<string, string>>(lines.Length);
+            foreach (var line in lines)
             {
-                var parsedObjects = new List<Dictionary<string, string>>(lines.Length);
-                foreach (var line in lines)
-                {
-                    parsedObjects.Add(parser.Parse(line));
-                }
-                await SendingHandler(parsedObjects, apiData);
+                parsedObjects.Add(parser.Parse(line));
             }
-            catch (Exception e)
-            {
-                
-            }
-        }
-
-        private async Task SendingHandler(List<Dictionary<string, string>> objects, ApiData apiData)
-        {
-            try
-            {
-                HttpResponseMessage response = null;
-                // send until response is succeeded
-                do
-                {
-                    var content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>
-                    {
-                        new KeyValuePair<string, string>(apiData.key, JsonSerializerHelper.Serialize(objects))
-                    });
-                    response = await _client.PostAsync(apiData.route, content);
-                } while (response != null && !response.IsSuccessStatusCode);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
+            await Parsed(parsedObjects);
         }
     }
 }

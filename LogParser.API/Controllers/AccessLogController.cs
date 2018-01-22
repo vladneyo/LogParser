@@ -20,9 +20,10 @@ namespace LogParser.API.Controllers
 
         [HttpPost]
         [Route("")]
-        public void Post(List<AccessLogDto> accesslog)
+        public void Post([FromBody]List<AccessLogDto> accesslog)
         {
-            
+            //"{dd/MMM/yyyy:hh:mm:ss zzz}"
+
         }
     }
 }

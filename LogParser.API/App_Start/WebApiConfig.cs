@@ -24,7 +24,6 @@ namespace LogParser.API
             config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
-            json.UseDataContractJsonSerializer = true;
             json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }

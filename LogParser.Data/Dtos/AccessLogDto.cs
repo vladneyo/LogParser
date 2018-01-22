@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LogParser.Data.Dtos
 {
@@ -8,7 +9,7 @@ namespace LogParser.Data.Dtos
 
         public string Host { get; set; }
 
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         public string Route { get; set; }
 
