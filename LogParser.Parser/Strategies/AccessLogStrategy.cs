@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using LogParser.Parser.Constants;
 
 namespace LogParser.Parser.Strategies
 {
     public class AccessLogStrategy : IParseStrategy
     {
-        private readonly string pattern =
-                @"^(?<host>\S+)\s[\-\s]*\[(?<date>[^\]]+)\]\s+((\""\w+\s+(?<route>([/\w\d\-_.~%@]+)|\*)(?<params>\?\S+)?\s+[/\w\d\.]+\"")|(\""\-\""))\s+(?<status>\d{3})\s+(?<size>(\d+))|(\-)$";
+        private readonly Regex regex = new Regex(StrategiesRegexes.AccessLogRegex, RegexOptions.Singleline | RegexOptions.Compiled);
 
         public Dictionary<string, string> Parse(string input)
         {
-            var match = Regex.Match(input, pattern, RegexOptions.Singleline);
+            var match = regex.Match(input);
+
             Dictionary<string, string> result = null;
             result = new Dictionary<string, string>
                 {
