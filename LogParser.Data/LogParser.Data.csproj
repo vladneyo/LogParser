@@ -44,6 +44,7 @@
     <Compile Include="Constants\ConsoleFlags.cs" />
     <Compile Include="Constants\LogTypeConstants.cs" />
     <Compile Include="Dtos\AccessLogDto.cs" />
+    <Compile Include="Converters\AccessLogDatetimeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

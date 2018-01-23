@@ -18,5 +18,7 @@ namespace LogParser.Data.Dtos
         public int RequestStatus { get; set; }
 
         public int ResponseSize { get; set; }
+
+        public string Geolocation { get; set; }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using LogParser.Data.Converters;
 using LogParser.Data.Dtos;
 
 namespace LogParser.API.Controllers
@@ -22,8 +24,8 @@ namespace LogParser.API.Controllers
         [Route("")]
         public void Post([FromBody]List<AccessLogDto> accesslog)
         {
-            //"{dd/MMM/yyyy:hh:mm:ss zzz}"
-
+            // how to convert string datetime from access log to normal datetime object
+            var a = new AccessLogDatetimeConverter().Convert(accesslog[0].Time);
         }
     }
 }

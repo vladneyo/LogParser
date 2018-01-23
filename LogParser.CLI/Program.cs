@@ -24,7 +24,10 @@ namespace LogParser.CLI
             {
                 var resultTask = invoker.Invoke(args[0], args.Length < 2 ? null : args[1]);
                 resultTask.Wait();
-                Console.WriteLine("Succeeded");
+                if (!resultTask.IsCanceled && !resultTask.IsFaulted)
+                {
+                    Console.WriteLine("Succeeded");
+                }
             }
             catch (AggregateException ex)
             {
@@ -38,7 +41,7 @@ namespace LogParser.CLI
             {
                 Console.WriteLine("Error");
                 Console.WriteLine(ex.Message);
-            }
+            }            
         }
     }
 
