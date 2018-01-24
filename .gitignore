@@ -12,3 +12,9 @@ LogParser.Data/obj/
 .vs/
 LogParser.Parser/obj/
 LogParser.Parser/bin/
+LogParser.Business/obj/
+LogParser.Business/bin/
+LogParser.Data.Contracts/obj/
+LogParser.Data.Contracts/bin/
+LogParser.Business.Contracts/bin/
+LogParser.Business.Contracts/obj/

@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Data", "LogParser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Parser", "LogParser.Parser\LogParser.Parser.csproj", "{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Business", "LogParser.Business\LogParser.Business.csproj", "{667418A6-680B-4E2A-806D-F4EC2CE22BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Business.Contracts", "LogParser.Business.Contracts\LogParser.Business.Contracts.csproj", "{0D8369F8-43AE-4B71-BF20-DE5962DA3322}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogParser.Data.Contracts", "LogParser.Data.Contracts\LogParser.Data.Contracts.csproj", "{2134EED3-360B-4CF1-9334-B8050CDE496E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,18 @@ Global
 		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F86F81AF-30E5-4B6F-AB79-B0E3CCEE4507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{667418A6-680B-4E2A-806D-F4EC2CE22BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{667418A6-680B-4E2A-806D-F4EC2CE22BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{667418A6-680B-4E2A-806D-F4EC2CE22BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{667418A6-680B-4E2A-806D-F4EC2CE22BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D8369F8-43AE-4B71-BF20-DE5962DA3322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D8369F8-43AE-4B71-BF20-DE5962DA3322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D8369F8-43AE-4B71-BF20-DE5962DA3322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D8369F8-43AE-4B71-BF20-DE5962DA3322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2134EED3-360B-4CF1-9334-B8050CDE496E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2134EED3-360B-4CF1-9334-B8050CDE496E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2134EED3-360B-4CF1-9334-B8050CDE496E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2134EED3-360B-4CF1-9334-B8050CDE496E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
