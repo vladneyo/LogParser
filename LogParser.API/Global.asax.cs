@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using LogParser.API.App_Start;
 
 namespace LogParser.API
 {
@@ -18,6 +19,7 @@ namespace LogParser.API
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            StructuremapWebApi.Start();
         }
     }
 }
