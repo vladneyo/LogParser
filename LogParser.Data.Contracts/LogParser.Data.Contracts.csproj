@@ -43,6 +43,12 @@
     <Compile Include="IAccessLogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogParser.EDM\LogParser.EDM.csproj">
+      <Project>{590FFF35-966E-4A36-BED9-BDB974D6F7C5}</Project>
+      <Name>LogParser.EDM</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
