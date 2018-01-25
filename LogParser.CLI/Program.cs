@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using LogParser.CLI.Commands;
 
 namespace LogParser.CLI
@@ -20,10 +21,13 @@ namespace LogParser.CLI
             }
             CommandInvoker invoker = new CommandInvoker();
             invoker.Configure();
+            Stopwatch watch = new Stopwatch();
             try
             {
+                watch.Start();
                 var resultTask = invoker.Invoke(args[0], args.Length < 2 ? null : args[1]);
                 resultTask.Wait();
+                watch.Stop();
                 if (!resultTask.IsCanceled && !resultTask.IsFaulted)
                 {
                     Console.WriteLine("Succeeded");
@@ -41,7 +45,8 @@ namespace LogParser.CLI
             {
                 Console.WriteLine("Error");
                 Console.WriteLine(ex.Message);
-            }            
+            }
+            Console.WriteLine($"Completed in {watch.ElapsedMilliseconds / 1000} sec");            
         }
     }
 

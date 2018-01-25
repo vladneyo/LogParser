@@ -34,6 +34,10 @@
       <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -48,7 +52,9 @@
     <Compile Include="AccessLogLogic.cs" />
     <Compile Include="AutoMapper\Profiles\AccessLogProfile.cs" />
     <Compile Include="AutoMapper\Resolvers\AccessLogDatetimeResolver.cs" />
+    <Compile Include="Helpers\JsonValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GeolocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LogParser.Business.Contracts\LogParser.Business.Contracts.csproj">

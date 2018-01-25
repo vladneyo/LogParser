@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using AutoMapper;
 using LogParser.Business.Contracts;
+using LogParser.Business.Helpers;
+using LogParser.Business.Services;
 using LogParser.Data.Contracts;
 using LogParser.Data.Dtos;
 using LogParser.EDM.Models;
+using Newtonsoft.Json.Linq;
 
 namespace LogParser.Business
 {
@@ -13,6 +16,7 @@ namespace LogParser.Business
     public class AccessLogLogic : IAccessLogLogic
     {
         private readonly IAccessLogRepository _accessLogRepository;
+        private readonly Dictionary<string, string> _cachedGeo = new Dictionary<string, string>();
 
         public AccessLogLogic(IAccessLogRepository repo)
         {
@@ -41,6 +45,19 @@ namespace LogParser.Business
 
         public List<AccessLogDto> CreateBulk(List<AccessLogDto> list)
         {
+            foreach (var item in list)
+            {
+                string geo = null;
+                _cachedGeo.TryGetValue(item.Host, out geo);
+                if (geo == null)
+                {
+                    _cachedGeo[item.Host] = GeolocationService.GetGeolocation(item.Host);
+                }
+
+                item.Geolocation = JsonValidator.IsValid(_cachedGeo[item.Host]) ? 
+                    JObject.Parse(_cachedGeo[item.Host])["country_name"].Value<string>() :
+                    _cachedGeo[item.Host];
+            }
             return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.CreateBulk(Mapper.Map<List<AccessLog>>(list)));
         }
     }

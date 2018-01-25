@@ -10,7 +10,7 @@ namespace LogParser.Parser
         public async Task ParseAsync(string mode, FileStream fs)
         {
             var parser = new LParser(_strategies[mode].Value);
-
+            
             // run 1st task for reading file by chunks
             var reading = Task.Run(() =>
             {

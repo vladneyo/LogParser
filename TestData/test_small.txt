@@ -1,0 +1,6 @@
+64.242.88.10 - - [07/Mar/2004:19:42:45 -0800] "GET /twiki/bin/edit/Main/Syslog_name?topicparent=Main.ConfigurationVariables HTTP/1.1" 401 12846
+80-219-148-207.dclient.hispeed.ch - - [07/Mar/2004:19:47:36 -0800] "OPTIONS * HTTP/1.0" 200 -
+h24-71-249-14.ca.shawcable.net - - [07/Mar/2004:22:29:12 -0800] "GET /mailman/options/cnc_notice/arobin%40shaw.c HTTP/1.1" 200 3382
+92-moc-6.acn.waw.pl - - [08/Mar/2004:08:37:14 -0800] "GET /twiki/pub/TWiki/TWikiLogos/twikiRobot46x50.gif HTTP/1.1" 304 -
+h194n2fls308o1033.telia.com - - [09/Mar/2004:13:49:05 -0800] "-" 408 -
+10.0.0.153 - - [10/Mar/2004:12:05:06 -0800] "POST /mailman/options/ppwc/ppwctwentynine@shaw.com HTTP/1.1" 200 14579
