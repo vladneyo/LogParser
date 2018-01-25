@@ -8,40 +8,40 @@ using LogParser.EDM.Models;
 
 namespace LogParser.Business
 {
-    // place where several repos can be used for one perpose
+    // the place where several repos, services, another logics can be used for one perpose
     // but this is not case
     public class AccessLogLogic : IAccessLogLogic
     {
-        private IAccessLogRepository _repo;
+        private readonly IAccessLogRepository _accessLogRepository;
 
         public AccessLogLogic(IAccessLogRepository repo)
         {
-            _repo = repo;
+            _accessLogRepository = repo;
         }
 
         public List<AccessLogDto> GetAll()
         {
-            return Mapper.Map<List<AccessLogDto>>(_repo.GetAll());
+            return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.GetAll());
         }
 
         public List<AccessLogDto> GetAll(int offset, DateTime? start = null, DateTime? end = null, int limit = 10)
         {
-            return Mapper.Map<List<AccessLogDto>>(_repo.GetAll(offset, start, end, limit));
+            return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.GetAll(offset, start, end, limit));
         }
 
         public List<string> GetTopHosts(int amount = 10, DateTime? start = null, DateTime? end = null, bool decs = false)
         {
-            return Mapper.Map<List<string>>(_repo.GetTopHosts(amount, start, end, decs));
+            return _accessLogRepository.GetTopHosts(amount, start, end, decs);
         }
 
         public List<string> GetTopRoutes(int amount = 10, DateTime? start = null, DateTime? end = null, bool decs = false)
         {
-            return Mapper.Map<List<string>>(_repo.GetTopRoutes(amount, start, end, decs));
+            return _accessLogRepository.GetTopRoutes(amount, start, end, decs);
         }
 
         public List<AccessLogDto> CreateBulk(List<AccessLogDto> list)
         {
-            return Mapper.Map<List<AccessLogDto>>(_repo.CreateBulk(Mapper.Map<List<AccessLog>>(list)));
+            return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.CreateBulk(Mapper.Map<List<AccessLog>>(list)));
         }
     }
 }

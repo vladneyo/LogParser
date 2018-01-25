@@ -7,7 +7,9 @@ namespace LogParser.API.DependencyResolution {
         public DefaultRegistry() {
             Scan(
                 scan => {
+                    scan.AssembliesFromApplicationBaseDirectory();
                     scan.TheCallingAssembly();
+                    scan.LookForRegistries();
                     scan.WithDefaultConventions();
                 });
         }
