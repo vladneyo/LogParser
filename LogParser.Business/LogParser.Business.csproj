@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +46,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessLogLogic.cs" />
+    <Compile Include="AutoMapper\Profiles\AccessLogProfile.cs" />
+    <Compile Include="AutoMapper\Resolvers\AccessLogDatetimeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogParser.Business.Contracts\LogParser.Business.Contracts.csproj">
+      <Project>{0D8369F8-43AE-4B71-BF20-DE5962DA3322}</Project>
+      <Name>LogParser.Business.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogParser.Data.Contracts\LogParser.Data.Contracts.csproj">
+      <Project>{2134eed3-360b-4cf1-9334-b8050cde496e}</Project>
+      <Name>LogParser.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogParser.Data\LogParser.Data.csproj">
+      <Project>{61a756ed-3762-46cc-9264-501f1b31474c}</Project>
+      <Name>LogParser.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogParser.EDM\LogParser.EDM.csproj">
+      <Project>{590FFF35-966E-4A36-BED9-BDB974D6F7C5}</Project>
+      <Name>LogParser.EDM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
