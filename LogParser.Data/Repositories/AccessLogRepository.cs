@@ -18,7 +18,7 @@ namespace LogParser.Data.Repositories
                 return list;
             }
         }
-
+        
         public List<AccessLog> GetAll()
         {
             using (ParserContext ctx = new ParserContext())
@@ -32,7 +32,6 @@ namespace LogParser.Data.Repositories
             using (ParserContext ctx = new ParserContext())
             {
                 var query = ctx.AccessLogs
-                    .Select(x => x)
                     .OrderBy(x => x.Time)
                     .AsQueryable();
 
@@ -72,8 +71,7 @@ namespace LogParser.Data.Repositories
         {
             using (ParserContext ctx = new ParserContext())
             {
-                var query = ctx.AccessLogs
-                    .Select(x => x);
+                var query = ctx.AccessLogs.AsQueryable();
 
                 query = decs ?
                     query.OrderByDescending(x => x.Time).AsQueryable() :
@@ -83,6 +81,7 @@ namespace LogParser.Data.Repositories
 
                 return query
                     .Select(exp)
+                    .Distinct()
                     .Take(amount)
                     .ToList();
             }

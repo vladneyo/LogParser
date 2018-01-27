@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 using LogParser.CLI.Commands;
+using LogParser.CLI.Constants;
+using LogParser.CLI.Services;
 
 namespace LogParser.CLI
 {
@@ -19,11 +23,21 @@ namespace LogParser.CLI
             {
                 throw new ArgumentException("No arguments passed");
             }
-            CommandInvoker invoker = new CommandInvoker();
-            invoker.Configure();
+
             Stopwatch watch = new Stopwatch();
             try
             {
+                if (bool.Parse(ConfigurationManager.AppSettings[AppSettingsConstants.PingBeforeSend]))
+                {
+                    var endpoint = ConfigurationManager.AppSettings[AppSettingsConstants.HostEndpoint];
+                    if (!ServerAvailabilityService.IsHostAvailable(endpoint))
+                    {
+                        throw new PingException($"{endpoint} is unavailable");
+                    }
+                }
+
+                CommandInvoker invoker = new CommandInvoker();
+                invoker.Configure();
                 watch.Start();
                 var resultTask = invoker.Invoke(args[0], args.Length < 2 ? null : args[1]);
                 resultTask.Wait();

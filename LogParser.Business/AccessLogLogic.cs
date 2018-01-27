@@ -16,6 +16,7 @@ namespace LogParser.Business
     public class AccessLogLogic : IAccessLogLogic
     {
         private readonly IAccessLogRepository _accessLogRepository;
+
         private readonly Dictionary<string, string> _cachedGeo = new Dictionary<string, string>();
 
         public AccessLogLogic(IAccessLogRepository repo)
@@ -54,7 +55,7 @@ namespace LogParser.Business
                     _cachedGeo[item.Host] = GeolocationService.GetGeolocation(item.Host);
                 }
 
-                item.Geolocation = JsonValidator.IsValid(_cachedGeo[item.Host]) ? 
+                item.Geolocation = JsonValidator.IsValid(_cachedGeo[item.Host]) ?
                     JObject.Parse(_cachedGeo[item.Host])["country_name"].Value<string>() :
                     _cachedGeo[item.Host];
             }

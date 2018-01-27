@@ -21,12 +21,16 @@ namespace LogParser.CLI.CommandHandlers
 
         private readonly Dictionary<string, string> _routes = new Dictionary<string, string>();
 
+        private readonly int _retrySendCount;
+
         public ParseCommandHandler()
         {
             _parser = new ParserModule(1024 * int.Parse(ConfigurationManager.AppSettings[AppSettingsConstants.BufferSize]),
                 int.Parse(ConfigurationManager.AppSettings[AppSettingsConstants.MaxPackageCapacity]));
 
             _client.BaseAddress = new Uri(ConfigurationManager.AppSettings[AppSettingsConstants.ApiEndpoint]);
+
+            _retrySendCount = int.Parse(ConfigurationManager.AppSettings[AppSettingsConstants.RetrySendCount]);
 
             SetupRoutes();
         }
@@ -53,6 +57,7 @@ namespace LogParser.CLI.CommandHandlers
         public async Task SendingHandler(List<Dictionary<string, string>> objects, string route)
         {
             HttpResponseMessage response = null;
+            int retries = 0;
             // send until response is succeeded
             do
             {
@@ -63,9 +68,9 @@ namespace LogParser.CLI.CommandHandlers
                     }),
                     Encoding.UTF8,
                     "application/json");
-
+                retries++;
                 response = await _client.PostAsync(route, content);
-            } while (response != null && !response.IsSuccessStatusCode);
+            } while (response != null && !response.IsSuccessStatusCode && retries <= _retrySendCount);
         }
 
         private void SetupRoutes()
