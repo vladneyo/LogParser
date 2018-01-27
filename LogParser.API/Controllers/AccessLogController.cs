@@ -33,20 +33,20 @@ namespace LogParser.API.Controllers
             return _accessLogLogic.GetAll(offset, start, end, limit.GetValueOrDefault());
         }
 
-        // /api/log/access/hosts?amount=10&start=03/09/2004&end=&decs=true
+        // /api/log/access/hosts?amount=10&start=03/09/2004&end=&desc=true
         [HttpGet]
         [Route("hosts")]
-        public List<string> GetHosts([FromUri]int? amount, [FromUri]DateTime? start, [FromUri]DateTime? end, [FromUri]bool? decs)
+        public List<string> GetHosts([FromUri]int? amount, [FromUri]DateTime? start, [FromUri]DateTime? end, [FromUri]bool? desc)
         {
-            return _accessLogLogic.GetTopHosts(amount.GetValueOrDefault(), start, end, decs.GetValueOrDefault());
+            return _accessLogLogic.GetTopHosts(amount.GetValueOrDefault(), start, end, desc.GetValueOrDefault());
         }
 
-        // /api/log/access/routes?amount=10&start=03/09/2004&end=&decs=true
+        // /api/log/access/routes?amount=10&start=03/09/2004&end=&desc=true
         [HttpGet]
         [Route("routes")]
-        public List<string> GetRoutes([FromUri]int? amount, [FromUri]DateTime? start, [FromUri]DateTime? end, [FromUri]bool? decs)
+        public List<string> GetRoutes([FromUri]int? amount, [FromUri]DateTime? start, [FromUri]DateTime? end, [FromUri]bool? desc)
         {
-            return _accessLogLogic.GetTopRoutes(amount.GetValueOrDefault(), start, end, decs.GetValueOrDefault());
+            return _accessLogLogic.GetTopRoutes(amount.GetValueOrDefault(), start, end, desc.GetValueOrDefault());
         }
 
         [HttpPost]

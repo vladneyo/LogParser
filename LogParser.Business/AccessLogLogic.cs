@@ -36,14 +36,14 @@ namespace LogParser.Business
             return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.GetAll(offset, start, end, limit));
         }
 
-        public List<string> GetTopHosts(int amount = 10, DateTime? start = null, DateTime? end = null, bool decs = false)
+        public List<string> GetTopHosts(int amount = 10, DateTime? start = null, DateTime? end = null, bool desc = false)
         {
-            return _accessLogRepository.GetTopHosts(amount, start, end, decs);
+            return _accessLogRepository.GetTopHosts(amount, start, end, desc);
         }
 
-        public List<string> GetTopRoutes(int amount = 10, DateTime? start = null, DateTime? end = null, bool decs = false)
+        public List<string> GetTopRoutes(int amount = 10, DateTime? start = null, DateTime? end = null, bool desc = false)
         {
-            return _accessLogRepository.GetTopRoutes(amount, start, end, decs);
+            return _accessLogRepository.GetTopRoutes(amount, start, end, desc);
         }
 
         public List<AccessLogDto> CreateBulk(List<AccessLogDto> list)
