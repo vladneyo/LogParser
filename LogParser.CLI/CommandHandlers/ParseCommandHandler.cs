@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text;
@@ -56,8 +57,10 @@ namespace LogParser.CLI.CommandHandlers
 
         public async Task SendingHandler(List<Dictionary<string, string>> objects, string route)
         {
+            Console.WriteLine($"Parsed {objects.Count}");
             HttpResponseMessage response = null;
             int retries = 0;
+            var s = new Stopwatch();
             // send until response is succeeded
             do
             {
@@ -69,8 +72,12 @@ namespace LogParser.CLI.CommandHandlers
                     Encoding.UTF8,
                     "application/json");
                 retries++;
+                Console.WriteLine("Sent");
+                s.Start();
                 response = await _client.PostAsync(route, content);
+                s.Stop();
             } while (response != null && !response.IsSuccessStatusCode && retries <= _retrySendCount);
+            Console.WriteLine($"Sent successfully and took {s.ElapsedMilliseconds}");
         }
 
         private void SetupRoutes()

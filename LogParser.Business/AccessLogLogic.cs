@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AutoMapper;
 using LogParser.Business.Contracts;
+using LogParser.Business.Contracts.Services;
 using LogParser.Business.Helpers;
 using LogParser.Business.Services;
 using LogParser.Data.Contracts;
@@ -17,11 +18,12 @@ namespace LogParser.Business
     {
         private readonly IAccessLogRepository _accessLogRepository;
 
-        private readonly Dictionary<string, string> _cachedGeo = new Dictionary<string, string>();
+        private readonly ICacheService<string> _geoCache;
 
-        public AccessLogLogic(IAccessLogRepository repo)
+        public AccessLogLogic(IAccessLogRepository repo, ICacheService<string> cache)
         {
             _accessLogRepository = repo;
+            _geoCache = cache;
         }
 
         public List<AccessLogDto> GetAll()
@@ -49,15 +51,15 @@ namespace LogParser.Business
             foreach (var item in list)
             {
                 string geo = null;
-                _cachedGeo.TryGetValue(item.Host, out geo);
+                geo = _geoCache[item.Host];
                 if (geo == null)
                 {
-                    _cachedGeo[item.Host] = GeolocationService.GetGeolocation(item.Host);
+                    _geoCache[item.Host] = GeolocationService.GetGeolocation(item.Host);
                 }
 
-                item.Geolocation = JsonValidator.IsValid(_cachedGeo[item.Host]) ?
-                    JObject.Parse(_cachedGeo[item.Host])["country_name"].Value<string>() :
-                    _cachedGeo[item.Host];
+                item.Geolocation = JsonValidator.IsValid(_geoCache[item.Host]) ?
+                    JObject.Parse(_geoCache[item.Host])["country_name"].Value<string>() :
+                    null;
             }
             return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.CreateBulk(Mapper.Map<List<AccessLog>>(list)));
         }

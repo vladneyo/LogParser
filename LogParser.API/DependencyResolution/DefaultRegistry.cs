@@ -1,4 +1,7 @@
+using LogParser.Business.Services;
+
 namespace LogParser.API.DependencyResolution {
+    using Business.Contracts.Services;
     using StructureMap;
 
     public class DefaultRegistry : Registry {
@@ -12,6 +15,7 @@ namespace LogParser.API.DependencyResolution {
                     scan.LookForRegistries();
                     scan.WithDefaultConventions();
                 });
+            For<ICacheService<string>>().Use(x => x.GetInstance<GeoCacheService>()).Singleton();
         }
 
         #endregion
