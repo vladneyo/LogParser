@@ -57,7 +57,9 @@ namespace LogParser.CLI.CommandHandlers
 
         public async Task SendingHandler(List<Dictionary<string, string>> objects, string route)
         {
+#if DEBUG
             Console.WriteLine($"Parsed {objects.Count}");
+#endif
             HttpResponseMessage response = null;
             int retries = 0;
             var s = new Stopwatch();
@@ -72,12 +74,16 @@ namespace LogParser.CLI.CommandHandlers
                     Encoding.UTF8,
                     "application/json");
                 retries++;
+#if DEBUG
                 Console.WriteLine("Sent");
+#endif
                 s.Start();
                 response = await _client.PostAsync(route, content);
                 s.Stop();
             } while (response != null && !response.IsSuccessStatusCode && retries <= _retrySendCount);
+#if DEBUG
             Console.WriteLine($"Sent successfully and took {s.ElapsedMilliseconds}");
+#endif
         }
 
         private void SetupRoutes()

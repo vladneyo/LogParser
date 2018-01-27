@@ -57,9 +57,15 @@ namespace LogParser.Business
                     _geoCache[item.Host] = GeolocationService.GetGeolocation(item.Host);
                 }
 
-                item.Geolocation = JsonValidator.IsValid(_geoCache[item.Host]) ?
-                    JObject.Parse(_geoCache[item.Host])["country_name"].Value<string>() :
-                    null;
+                if (JsonValidator.IsValid(_geoCache[item.Host]))
+                {
+                    var country = JObject.Parse(_geoCache[item.Host])["country_name"].Value<string>();
+                    item.Geolocation = string.IsNullOrEmpty(country) ? null : country;
+                }
+                else
+                {
+                    item.Geolocation = null;
+                }
             }
             return Mapper.Map<List<AccessLogDto>>(_accessLogRepository.CreateBulk(Mapper.Map<List<AccessLog>>(list)));
         }
